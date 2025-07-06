@@ -1,8 +1,9 @@
 function App() {
 
+  const name ="tanishq"
 
   return (
-    <h1>Tanishq is very great</h1>
+    <h1>{name} is very great</h1> //evaluaion expression
    
   )
 }
