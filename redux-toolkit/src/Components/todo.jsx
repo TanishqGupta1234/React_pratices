@@ -1,25 +1,43 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { removeToDo } from "../features/toDo/todoSlice";
+import React from "react"; // Import React for building the component.
+import { useSelector, useDispatch } from "react-redux"; // Import `useSelector` to read state from Redux, and `useDispatch` to dispatch actions.
+import { removeToDo } from "../features/toDo/todoSlice"; // Import the `removeToDo` action creator from our Redux slice.
 
 function Todos() {
+  // `useSelector` hook allows you to extract data from the Redux store state.
+  // The function passed to `useSelector` receives the entire Redux state as an argument.
+  // Here, we are selecting the `todos` array from the state.
+  // Whenever the `todos` array in the Redux store changes, this component will re-render.
   const todos = useSelector((state) => state.todos);
+
+  // `useDispatch` hook returns a reference to the `dispatch` function from the Redux store.
+  // We use this `dispatch` function to send actions to the Redux store to update the state.
   const dispatch = useDispatch();
 
   return (
     <>
-      <div>Todos</div>
+      {/* A simple heading for the todo list */}
+      <div className="text-white text-2xl font-bold mt-8 mb-4">Todos</div>
+      {/* Unordered list to display the todo items */}
       <ul className="list-none">
+        {/* Map over the `todos` array obtained from the Redux store.
+            For each `todo` object, we render a list item (`<li>`). */}
         {todos.map((todo) => (
           <li
-            className="mt-4 flex justify-between items-center bg-zinc-800 px-4 py-2 rounded"
+            // `key` prop is crucial for React to efficiently update lists.
+            // It should be a unique identifier for each item.
             key={todo.id}
+            className="mt-4 flex justify-between items-center bg-zinc-800 px-4 py-2 rounded"
           >
+            {/* Display the text content of the todo item */}
             <div className="text-white">{todo.text}</div>
+            {/* Button to remove a todo item */}
             <button
+              // When this button is clicked, we dispatch the `removeToDo` action.
+              // We pass `todo.id` as the payload, which tells the reducer which todo to remove.
               onClick={() => dispatch(removeToDo(todo.id))}
               className="text-white bg-red-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md"
             >
+              {/* SVG icon for a delete/trashcan button */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -42,4 +60,4 @@ function Todos() {
   );
 }
 
-export default Todos;
+export default Todos; // Export the `Todos` component for use in other parts of the application.
