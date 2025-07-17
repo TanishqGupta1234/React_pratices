@@ -11,7 +11,7 @@ export const ToDOContext = createContext({
   addTodo: (todo) => {},
   updatedToDo: (id, todo) => {},
   deletedToDo: (id) => {},
-  toggleCompleted: (id) => {},
+  toggleComplete: (id) => {},
 });
 
 export const useToDO = () => {
